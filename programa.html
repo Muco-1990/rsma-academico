@@ -38,7 +38,6 @@
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
         import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-        // CONFIGURAÇÃO DO FIREBASE (Substitui pelos teus dados)
         const firebaseConfig = {
             apiKey: "AIzaSyAdbnKl5xSyHjrvfYEh81h1bASGyuG0jzI",
             authDomain: "syrma-academy.firebaseapp.com",
@@ -53,18 +52,16 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        // LISTA DE TEMAS (O que faz os temas aparecerem no ecrã)
         const materiais = [
-            { titulo: "Metodologia de investigação em revisão sistemática", teoria: "temas/Tema-1/Tema-1(teoria).pdf", slides: "temas/Tema-1/Tema-1(slides).pdf", exercicio: "#" },
-            { titulo: "Introdução à tomada de decisão baseada na evidência", teoria: "temas/Tema-2/Tema-2(teoria).pdf", slides: "temas/Tema-2/Tema-2(slides).pdf", exercicio: "#" },
-            { titulo: "Introdução aos softwares de revisão (Rayyan, Zotero, RevMan)", teoria: "temas/Tema-3/Tema-3(teoria).pdf", slides: "temas/Tema-3/Tema-3(slides).pdf", exercicio: "#" },
-            { titulo: "Introdução à meta-análise", teoria: "temas/Tema-4/Tema-4(teoria).pdf", slides: "temas/Tema-4/Tema-4(slides).pdf", exercicio: "#" },
-            { titulo: "Desenvolvimento de tópicos (PICO, PECO, etc.)", teoria: "temas/Tema-5/Tema-5(teoria).pdf", slides: "temas/Tema-5/Tema-5(slides).pdf", exercicio: "#" },
-            { titulo: "Critérios de elegibilidade para revisão sistemática", teoria: "temas/Tema-6/Tema-6(teoria).pdf", slides: "temas/Tema-6/Tema-6(slides).pdf", exercicio: "#" },
-            { titulo: "Procura sistemática de literatura (Strings de busca)", teoria: "temas/Tema-7/Tema-7(teoria).pdf", slides: "temas/Tema-7/Tema-7(slides).pdf", exercicio: "#" }
+            { titulo: "Metodologia de investigação em revisão sistemática", teoria: "temas/Tema-1/Tema-1(teoria).pdf", slides: "temas/Tema-1/Tema-1(slides).pdf", exercicio: "https://forms.gle/GfTS9seAUb9KPpd66" },
+            { titulo: "Introdução à tomada de decisão baseada na evidência", teoria: "temas/Tema-2/Tema-2(teoria).pdf", slides: "temas/Tema-2/Tema-2(slides).pdf", exercicio: "https://forms.gle/6LJCnKnjuGqiHKfK6" },
+            { titulo: "Introdução aos softwares de revisão (Rayyan, Zotero, RevMan)", teoria: "temas/Tema-3/Tema-3(teoria).pdf", slides: "temas/Tema-3/Tema-3(slides).pdf", exercicio: "https://forms.gle/kHCtc73XBH1uPX1v5" },
+            { titulo: "Introdução à meta-análise", teoria: "temas/Tema-4/Tema-4(teoria).pdf", slides: "temas/Tema-4/Tema-4(slides).pdf", exercicio: "https://forms.gle/tqxNfumGsTgVjfwV7" },
+            { titulo: "Desenvolvimento de tópicos (PICO, PECO, etc.)", teoria: "temas/Tema-5/Tema-5(teoria).pdf", slides: "temas/Tema-5/Tema-5(slides).pdf", exercicio: "https://forms.gle/Yt1fRBB1kyQ9s2zZA" },
+            { titulo: "Critérios de elegibilidade para revisão sistemática", teoria: "temas/Tema-6/Tema-6(teoria).pdf", slides: "temas/Tema-6/Tema-6(slides).pdf", exercicio: "https://forms.gle/gUvTBB9XsqZb4mjS6" },
+            { titulo: "Procura sistemática de literatura (Strings de busca)", teoria: "temas/Tema-7/Tema-7(teoria).pdf", slides: "temas/Tema-7/Tema-7(slides).pdf", exercicio: "https://forms.gle/QZGjyubevs37yFfm6" }
         ];
 
-        // FUNÇÃO PARA IMPRIMIR OS TEMAS NO HTML
         const container = document.getElementById('lista-temas');
         materiais.forEach((m, index) => {
             const card = document.createElement('section');
@@ -77,19 +74,18 @@
                 <div class="flex flex-wrap gap-4 pl-16">
                     <a href="${m.teoria}" target="_blank" class="px-5 py-2.5 bg-slate-100 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-slate-800 hover:text-white transition">📖 Teoria</a>
                     <a href="${m.slides}" target="_blank" class="px-5 py-2.5 bg-slate-100 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-slate-800 hover:text-white transition">📊 Slides</a>
-                    <button onclick="finalizarModulo('tema${index + 1}')" class="px-5 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-blue-700 transition shadow-lg shadow-blue-200">📝 Concluir Módulo</button>
+                    <a href="${m.exercicio}" target="_blank" class="px-5 py-2.5 bg-blue-50 text-blue-600 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-blue-600 hover:text-white transition border border-blue-100">📝 Avaliação</a>
+                    <button onclick="finalizarModulo('tema${index + 1}')" class="px-5 py-2.5 bg-blue-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-blue-700 transition shadow-lg shadow-blue-200">✅ Concluir</button>
                 </div>`;
             container.appendChild(card);
         });
 
-        // LÓGICA DE FINALIZAÇÃO (Conecta ao Firebase Firestore)
         window.finalizarModulo = async (id) => {
             let progresso = JSON.parse(localStorage.getItem('progresso_aluno')) || {};
             progresso[id] = true;
             localStorage.setItem('progresso_aluno', JSON.stringify(progresso));
 
             const totalConcluidos = Object.keys(progresso).length;
-
             if (totalConcluidos >= 7) {
                 const user = auth.currentUser;
                 try {
@@ -118,7 +114,6 @@
             }
         };
 
-        // Definir Ano via URL
         const params = new URLSearchParams(window.location.search);
         document.getElementById('anoDisplay').innerText = params.get('ano') || '2026';
     </script>

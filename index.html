@@ -20,12 +20,48 @@
         <p class="text-xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed">
             Transforme dados em evidência científica de alto impacto com rigor metodológico e ética profissional.
         </p>
-         <div class="prof">
+        <div class="prof mb-8 text-lg font-medium opacity-80">
             Prof. Fernando Mucomole
         </div>
         <div class="flex gap-4 justify-center">
-            <a href="auth.html" class="bg-blue-600 hover:bg-blue-700 px-12 py-5 rounded-full font-bold text-lg transition-all shadow-xl">Entrar no Sistema</a>
+            <a href="auth.html" id="btn-entrar" class="bg-blue-600 hover:bg-blue-700 px-12 py-5 rounded-full font-bold text-lg transition-all shadow-xl">
+                Entrar no Sistema
+            </a>
         </div>
     </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // CONFIGURAÇÃO DO TEU PROJETO (Substitui pelos teus dados reais do Console)
+        const firebaseConfig = {
+            apiKey: "AIzaSyAdbnKl5xSyHjrvfYEh81h1bASGyuG0jzI",
+            authDomain: "syrma-academy.firebaseapp.com",
+            projectId: "syrma-academy",
+            storageBucket: "syrma-academy.firebasestorage.app",
+            messagingSenderId: "346936875689",
+            appId: "1:346936875689:web:5fe3bb4c068d935197e7b8",
+            measurementId: "G-3PDYYJ97VE"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const btnEntrar = document.getElementById('btn-entrar');
+
+        // VERIFICAÇÃO AUTOMÁTICA DE LOGIN
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Se o aluno já estiver logado, mudamos o destino do botão para o Dashboard
+                btnEntrar.href = "dashboard.html";
+                btnEntrar.innerText = "Ir para o meu Painel";
+                console.log("Usuário logado: Redirecionamento pronto para Dashboard.");
+            } else {
+                // Se não estiver logado, o botão continua a ir para auth.html
+                btnEntrar.href = "auth.html";
+                console.log("Usuário não logado: Destino definido para Login.");
+            }
+        });
+    </script>
 </body>
 </html>
