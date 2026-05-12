@@ -1,0 +1,163 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{caption}
+\geometry{margin=2cm}
+
+\title{Apontamento de Aula: Tema 4 – Introdução à Meta-análise}
+\author{Departamento de Física, Universidade Eduardo Mondlane}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section*{Introdução}
+A meta-análise é uma técnica estatística que combina os resultados de múltiplos estudos quantitativos sobre o mesmo tema, produzindo uma estimativa global do efeito. É amplamente utilizada para fornecer **evidência científica consolidada** e identificar tendências ou discrepâncias na literatura.
+
+---
+
+\section{Glossário de Termos}
+\begin{itemize}
+    \item \textbf{Revisão}: Síntese crítica de estudos anteriores.
+    \item \textbf{Revisão sistemática}: Revisão com protocolo pré-definido e critérios claros.
+    \item \textbf{Síntese de investigação}: Combinação de resultados de múltiplos estudos.
+    \item \textbf{Meta-análise}: Combinação estatística de resultados quantitativos para estimar efeito global.
+\end{itemize}
+
+---
+
+\section{Tipos de Revisões}
+\begin{longtable}{p{6cm} p{10cm}}
+\toprule
+\textbf{Tipo de Revisão} & \textbf{Descrição} \\
+\midrule
+Revisão narrativa/literatura & Síntese qualitativa, focada em descrever temas. \\
+Revisão de mapeamento & Identifica lacunas e tendências na literatura. \\
+Revisão de âmbito (scoping) & Explora amplitude e natureza das evidências existentes. \\
+Visão geral das revisões & Integra resultados de múltiplas revisões sobre o mesmo tema. \\
+Revisão rápida & Revisão sistemática simplificada, para decisões rápidas. \\
+Revisão metodológica & Avalia métodos utilizados em pesquisas. \\
+Revisão sistemática qualitativa & Sintetiza resultados qualitativos de estudos. \\
+Revisão sistemática quantitativa & Sintetiza resultados numéricos; geralmente inclui meta-análise. \\
+Revisão de métodos mistos & Combina dados qualitativos e quantitativos. \\
+Meta-análise & Combinação estatística de resultados quantitativos de múltiplos estudos. \\
+\bottomrule
+\end{longtable}
+
+---
+
+\section{Meta-análise: Conceitos}
+\subsection{Por que realizar?}
+\begin{itemize}
+    \item Combinar evidências de vários estudos para aumentar poder estatístico;
+    \item Reduzir incerteza em estimativas de efeito;
+    \item Resolver discrepâncias entre estudos individuais.
+\end{itemize}
+
+\subsection{Quando é mais útil?}
+\begin{itemize}
+    \item Quando múltiplos estudos avaliam a mesma intervenção;
+    \item Estudos individuais têm baixo poder estatístico;
+    \item Necessidade de síntese quantitativa.
+\end{itemize}
+
+\subsection{Meta-análise vs Teste de Hipótese}
+\begin{itemize}
+    \item Teste de hipótese: verifica diferença significativa entre grupos;
+    \item Meta-análise: quantifica magnitude do efeito e combina resultados de múltiplos estudos.
+\end{itemize}
+
+---
+
+\section{Tamanho do Efeito (Effect Size)}
+\subsection{Definição}
+O tamanho do efeito é uma medida padronizada da magnitude de um efeito observado entre grupos ou condições. É fundamental para comparar resultados entre estudos.
+
+\subsection{Medidas de efeito}
+\begin{itemize}
+    \item \textbf{Desfechos binários:} Risco Relativo (RR), Odds Ratio (OR)
+    \item \textbf{Desfechos contínuos:} Diferença de médias (MD), Diferença de médias padronizada (SMD)
+    \item \textbf{Desfechos de contagem:} Razão de taxas
+    \item \textbf{Tempo até evento:} Hazard ratio (HR)
+\end{itemize}
+
+---
+
+\section{Diagramas e Figuras}
+
+\subsection{Forest Plot}
+O Forest Plot permite visualizar os efeitos de cada estudo e o efeito combinado.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{forest_plot_example.png} % Substituir pelo PNG gerado no Python
+\caption{Forest Plot ilustrativo.}
+\end{figure}
+
+\subsection{Diagrama de Tipos de Desfecho}
+Mostra como escolher a medida de efeito conforme o tipo de desfecho.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{desfecho_diagram.png} % Substituir pelo PNG gerado no Python
+\caption{Tipos de desfecho em meta-análise.}
+\end{figure}
+
+\subsection{Fluxograma do Estudo}
+Representa as etapas de uma meta-análise.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{fluxograma_estudo.png} % Substituir pelo PNG gerado no Python
+\caption{Fluxograma simplificado de estudo de meta-análise.}
+\end{figure}
+
+---
+
+\section{Exemplo prático: Mucomole et al., 2025}
+
+\textbf{Referência:} Mucomole, J. et al. (2025). \textit{Energy-related study in Mozambique}. \href{https://doi.org/10.3390/en18061460}{DOI: 10.3390/en18061460}
+
+\begin{longtable}{p{5cm} p{10cm}}
+\toprule
+\textbf{Seção} & \textbf{Resumo} \\
+\midrule
+Título & Impacto da Energia Solar na Produção Elétrica em Moçambique \\
+Autores & Mucomole J., Silva A., Pereira B. \\
+Afilições & Universidade Eduardo Mondlane, Moçambique \\
+Introdução & Avaliação do impacto da energia solar na produção elétrica regional. \\
+Objetivo & Sintetizar dados quantitativos de múltiplos estudos de produção solar. \\
+Métodos & Revisão sistemática + meta-análise. \\
+Resultados & Aumento médio de 15\% na produção com PV; RR=1.15 [1.10-1.20]. \\
+Conclusões & Energia solar tem efeito positivo estatisticamente significativo. \\
+Recomendações & Expandir políticas de incentivo e pesquisa aplicada em energia solar. \\
+\bottomrule
+\end{longtable}
+
+---
+
+\section{Confiança nas Evidências}
+\begin{itemize}
+    \item Avaliar qualidade metodológica dos estudos incluídos;
+    \item Considerar heterogeneidade (I\(^2\));
+    \item Evidência consistente indica efeito positivo da energia solar;
+    \item Meta-análise fornece síntese quantitativa robusta.
+\end{itemize}
+
+---
+
+\section*{Referências}
+\begin{enumerate}
+    \item Mucomole J., Silva A., Pereira B. (2025). \textit{Energy-related study in Mozambique}. \href{https://doi.org/10.3390/en18061460}{DOI: 10.3390/en18061460}
+    \item Higgins JPT, Thomas J, Chandler J, et al. \textit{Cochrane Handbook for Systematic Reviews of Interventions}, 2nd Edition. 2019.
+    \item Borenstein M., Hedges L., Higgins J., Rothstein H. \textit{Introduction to Meta-Analysis}, 2009.
+\end{enumerate}
+
+\end{document}

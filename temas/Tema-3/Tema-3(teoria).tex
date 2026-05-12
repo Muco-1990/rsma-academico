@@ -1,0 +1,189 @@
+\documentclass[12pt,a4paper]{article}
+
+% -------------------------------------------------
+% Pacotes
+% -------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{xcolor}
+
+\geometry{top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm}
+\onehalfspacing
+
+% -------------------------------------------------
+% Título
+% -------------------------------------------------
+\title{
+Apontamento de Literatura – Tema 3\\
+\large Introdução aos Softwares de Revisão Sistemática
+}
+\author{
+Disciplina: Revisão Sistemática e Meta-análises\\
+Pós-graduação (Mestrado e Doutoramento)
+}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+% =================================================
+\section{Conceito de software de revisão sistemática}
+% =================================================
+Softwares de revisão sistemática são ferramentas digitais projetadas para \textbf{organizar, gerenciar, avaliar e sintetizar a literatura científica} de forma rigorosa e reprodutível.
+
+\textbf{Objetivos principais:}
+\begin{itemize}
+    \item Facilitar busca, seleção e triagem de estudos;
+    \item Automatizar extração de dados e avaliação de qualidade;
+    \item Auxiliar na síntese qualitativa e quantitativa;
+    \item Garantir transparência e rastreabilidade.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{fig1_softwares.png}
+    \caption{Diagrama conceptual de softwares de revisão sistemática}
+    \label{fig:softwares}
+\end{figure}
+
+% =================================================
+\section{Softwares mais utilizados}
+% =================================================
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{3cm}|p{3cm}|p{7cm}|}
+\hline
+\textbf{Software} & \textbf{Tipo} & \textbf{Finalidade / Destaques} \\
+\hline
+EPPI-Reviewer Web & Plataforma online & Triagem, codificação, meta-análise, projetos personalizáveis \\
+\hline
+JBI SUMARI & Desktop & Revisões sistemáticas e de escopo, avaliação crítica de estudos \\
+\hline
+RevMan & Desktop (Cochrane) & Gestão de revisões Cochrane, metanálises, gráficos de efeito \\
+\hline
+Rayyan & Online & Triagem rápida, detecção de duplicados, colaboração entre revisores \\
+\hline
+Outros & Variável & Mendeley, Zotero, Covidence, DistillerSR, etc. \\
+\hline
+\end{tabular}
+\caption{Principais softwares de revisão sistemática}
+\end{table}
+
+% =================================================
+\section{EPPI-Reviewer Web}
+% =================================================
+EPPI-Reviewer é uma plataforma online robusta para gerenciar grandes revisões sistemáticas.
+
+\textbf{Principais funcionalidades:}
+\begin{itemize}
+    \item Projetos colaborativos;
+    \item Importação de referências de bases de dados (PubMed, Scopus, Web of Science);
+    \item Triagem e codificação estruturada;
+    \item Ferramentas avançadas de síntese e metanálise;
+    \item Exportação de relatórios padronizados.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{fig2_eppi.png}
+    \caption{Interface do EPPI-Reviewer Web}
+    \label{fig:eppi}
+\end{figure}
+
+% =================================================
+\section{Review Manager (RevMan)}
+% =================================================
+RevMan é o software oficial da Cochrane para revisões sistemáticas e metanálises.
+
+\textbf{Características principais:}
+\begin{itemize}
+    \item Desenvolvimento de protocolos e revisões completas;
+    \item Organização de referências e estudos incluídos;
+    \item Meta-análise com gráficos (forest plots, funnel plots);
+    \item Avaliação de risco de viés;
+    \item Exportação para publicação.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{fig3_revman.png}
+    \caption{Interface do RevMan para gestão de revisões sistemáticas}
+    \label{fig:revman}
+\end{figure}
+
+% =================================================
+\section{Funcionalidades detalhadas do RevMan}
+% =================================================
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{5cm}|p{10cm}|}
+\hline
+\textbf{Função} & \textbf{Descrição} \\
+\hline
+Inserção de estudos & Adicionar e organizar estudos incluídos e excluídos \\
+\hline
+Avaliação de qualidade & Risk of Bias tool; checklist metodológica \\
+\hline
+Meta-análise & Cálculo automático de efeitos, forest plots \\
+\hline
+Gráficos de síntese & Funnel plots, gráficos de heterogeneidade \\
+\hline
+Exportação & PDF, Word e dados para bases externas \\
+\hline
+\end{tabular}
+\caption{Principais funcionalidades do RevMan}
+\end{table}
+
+% =================================================
+\section{Cochrane e RevMan}
+% =================================================
+\begin{itemize}
+    \item Cochrane: organização internacional para revisões sistemáticas de alta qualidade;
+    \item RevMan é gratuito para membros Cochrane; versão básica gratuita para não membros;
+    \item Objetivo: padronizar revisões, aumentar confiabilidade e facilitar disseminação da evidência.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{fig4_cochrane.png}
+    \caption{Fluxo de produção de revisões sistemáticas na Cochrane}
+    \label{fig:cochrane}
+\end{figure}
+
+% =================================================
+\section{O que o RevMan pode fazer por si}
+% =================================================
+\begin{itemize}
+    \item Automatiza cálculos estatísticos de metanálise;
+    \item Produz gráficos claros de efeito e heterogeneidade;
+    \item Permite organização de referências e estudos incluídos;
+    \item Ajuda a preparar manuscritos padronizados;
+    \item Facilita colaboração em equipe e rastreabilidade.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{fig5_revman_func.png}
+    \caption{Exemplo de funcionalidades do RevMan}
+    \label{fig:revman_func}
+\end{figure}
+
+% =================================================
+\section{Considerações finais}
+% =================================================
+Para mestrados e doutoramentos:
+
+\begin{itemize}
+    \item Domínio de softwares de revisão sistemática é essencial;
+    \item EPPI-Reviewer, RevMan e Rayyan oferecem abordagens complementares;
+    \item Escolha depende de tipo de revisão, tamanho da amostra e recursos disponíveis;
+    \item Saber explorar metanálises, gráficos e relatórios automáticos aumenta rigor e eficiência.
+\end{itemize}
+
+\end{document}
