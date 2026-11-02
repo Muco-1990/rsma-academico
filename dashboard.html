@@ -21,24 +21,43 @@
             <script>
                 const anos = [2025, 2026];
                 anos.forEach(ano => {
+                    let botoesEdicoes = '';
+
+                    if (ano === 2025) {
+                        botoesEdicoes = `
+                            <a href="programa.html?ano=2025&edicao=1" class="flex flex-col items-center justify-center p-6 bg-blue-50 border border-blue-100 rounded-2xl group hover:bg-blue-600 transition-all">
+                                <span class="text-blue-600 font-black text-2xl group-hover:text-white transition-colors">EDIÇÃO 1</span>
+                                <span class="text-[10px] font-bold text-blue-400 group-hover:text-blue-200 uppercase mt-1">Aceder</span>
+                            </a>
+                            <a href="programa.html?ano=2025&edicao=2" class="flex flex-col items-center justify-center p-6 bg-slate-50 border border-slate-100 rounded-2xl group hover:bg-slate-800 transition-all">
+                                <span class="text-slate-700 font-black text-2xl group-hover:text-white transition-colors">EDIÇÃO 2</span>
+                                <span class="text-[10px] font-bold text-slate-400 group-hover:text-slate-300 uppercase mt-1">Aceder</span>
+                            </a>
+                        `;
+                    } else {
+                        botoesEdicoes = `
+                            <a href="programa.html?ano=2026&edicao=1" class="flex flex-col items-center justify-center p-6 bg-blue-50 border border-blue-100 rounded-2xl group hover:bg-blue-600 transition-all">
+                                <span class="text-blue-600 font-black text-2xl group-hover:text-white transition-colors">EDIÇÃO 1</span>
+                                <span class="text-[10px] font-bold text-blue-400 group-hover:text-blue-200 uppercase mt-1">Aceder</span>
+                            </a>
+                            <a href="programa.html?ano=2026&edicao=2" class="flex flex-col items-center justify-center p-6 bg-slate-50 border border-slate-100 rounded-2xl group hover:bg-slate-800 transition-all">
+                                <span class="text-slate-700 font-black text-2xl group-hover:text-white transition-colors">EDIÇÃO 2</span>
+                                <span class="text-[10px] font-bold text-slate-400 group-hover:text-slate-300 uppercase mt-1">Aceder</span>
+                            </a>
+                            <a href="programa.html?ano=2026&edicao=3" class="col-span-2 flex flex-col items-center justify-center p-6 bg-amber-50 border border-amber-200 rounded-2xl group hover:bg-amber-600 transition-all shadow-sm">
+                                <span class="text-amber-700 font-black text-2xl group-hover:text-white transition-colors">EDIÇÃO 3 (Programa Completo - 24 Módulos - FACED)</span>
+                                <span class="text-[10px] font-bold text-amber-500 group-hover:text-amber-200 uppercase mt-1">Aceder</span>
+                            </a>
+                        `;
+                    }
+
                     document.write(`
                         <div class="bg-white border border-slate-200 p-8 rounded-3xl shadow-sm hover:shadow-md transition-all">
                             <span class="text-slate-400 font-black text-5xl mb-4 block">${ano}</span>
                             <h3 class="text-2xl font-bold text-slate-800 mb-4">Portfólio de Edições</h3>
                             <p class="text-slate-500 text-sm mb-8 leading-relaxed">Selecione abaixo qual edição de ${ano} pretende aceder para visualizar os materiais e o plano temático específico.</p>
-                            
                             <div class="grid grid-cols-2 gap-4">
-                                <!-- Botão Edição 1 -->
-                                <a href="programa_1.html?ano=${ano}&edicao=1" class="flex flex-col items-center justify-center p-6 bg-blue-50 border border-blue-100 rounded-2xl group hover:bg-blue-600 transition-all">
-                                    <span class="text-blue-600 font-black text-2xl group-hover:text-white transition-colors">EDIÇÃO 1</span>
-                                    <span class="text-[10px] font-bold text-blue-400 group-hover:text-blue-200 uppercase mt-1">Aceder</span>
-                                </a>
-
-                                <!-- Botão Edição 2 -->
-                                <a href="programa.html?ano=${ano}&edicao=2" class="flex flex-col items-center justify-center p-6 bg-slate-50 border border-slate-100 rounded-2xl group hover:bg-slate-800 transition-all">
-                                    <span class="text-slate-700 font-black text-2xl group-hover:text-white transition-colors">EDIÇÃO 2</span>
-                                    <span class="text-[10px] font-bold text-slate-400 group-hover:text-slate-300 uppercase mt-1">Aceder</span>
-                                </a>
+                                ${botoesEdicoes}
                             </div>
                         </div>
                     `);
