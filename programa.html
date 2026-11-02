@@ -10,7 +10,7 @@
     
     <aside class="w-full md:w-80 bg-slate-900 text-white p-10 flex flex-col md:fixed md:h-full">
         <h2 class="text-blue-400 font-bold uppercase tracking-widest text-[10px] mb-4">Currículo Ativo</h2>
-        <h1 class="text-3xl font-black mb-10">EDIÇÃO <span id="anoDisplay" class="text-blue-500">2026</span></h1>
+        <h1 class="text-3xl font-black mb-10"><span id="anoDisplay" class="text-blue-500">2026</span></h1>
         
         <nav class="space-y-6 flex-1">
             <a href="2-Plano-Temático.pdf" target="_blank" class="block p-4 border border-slate-700 rounded-xl hover:bg-slate-800 transition text-center font-bold text-white shadow-sm">
@@ -26,7 +26,7 @@
         <div class="max-w-4xl mx-auto">
             <header class="mb-12 border-b border-slate-200 pb-8">
                 <h2 class="text-4xl font-black text-slate-900 mb-2">Sessões do Curso</h2>
-                <p class="text-slate-500 italic">Complete os 7 módulos para solicitar a certificação final.</p>
+                <p class="text-slate-500 italic" id="subtituloSecao">Complete todos os módulos para solicitar a certificação final.</p>
             </header>
             
             <div id="lista-temas" class="space-y-12"></div>
@@ -38,21 +38,29 @@
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
         import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyAdbnKl5xSyHjrvfYEh81h1bASGyuG0jzI",
-            authDomain: "syrma-academy.firebaseapp.com",
-            projectId: "syrma-academy",
+        const firebaseConfig = { 
+            apiKey: "222222xSyHjrvfYEh81h1bASGyuG0jzI",
+            authDomain: "s222.firebaseapp.com",
+            projectId: "s2222-cademy",
             storageBucket: "syrma-academy.firebasestorage.app",
-            messagingSenderId: "346936875689",
-            appId: "1:346936875689:web:5fe3bb4c068d935197e7b8",
-            measurementId: "G-3PDYYJ97VE"
+            messagingSenderId: "33466875689",
+            appId: "1:3423444567:web:5fe3bb4c068d935197e7b8",
+            measurementId: "G-3PDDTH97VE" 
         };
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        const materiais = [
+        // Capturar parâmetros de forma segura
+        const params = new URLSearchParams(window.location.search);
+        const anoParam = params.get('ano') || '2026';
+        const edicaoParam = params.get('edicao') || '2';
+
+        document.getElementById('anoDisplay').innerText = `${anoParam} - Edição ${edicaoParam}`;
+
+        // 1. Matriz de materiais padrão (Edições 1 e 2 - 7 temas)
+        const materiaisEdicaoPadrao = [
             { titulo: "Metodologia de investigação em revisão sistemática", teoria: "temas/Tema-1/Tema-1(teoria).pdf", slides: "temas/Tema-1/Tema-1(slides).pdf", exercicio: "https://forms.gle/orQ7dyTDJh5hRNie9" },
             { titulo: "Introdução à tomada de decisão baseada na evidência", teoria: "temas/Tema-2/Tema-2(teoria).pdf", slides: "temas/Tema-2/Tema-2(slides).pdf", exercicio: "https://forms.gle/1bYQTgUtie1X1JNh7" },
             { titulo: "Introdução aos softwares de revisão (Rayyan, Zotero, RevMan)", teoria: "temas/Tema-3/Tema-3(teoria).pdf", slides: "temas/Tema-3/Tema-3(slides).pdf", exercicio: "https://forms.gle/vbvCVN6syg4LxWQb7" },
@@ -62,16 +70,50 @@
             { titulo: "Procura sistemática de literatura (Strings de busca)", teoria: "temas/Tema-7/Tema-7(teoria).pdf", slides: "temas/Tema-7/Tema-7(slides).pdf", exercicio: "https://forms.gle/huBf3eJuh994m7gz7" }
         ];
 
+        // 2. Matriz de materiais da 3ª Edição (24 módulos completos)
+        const materiaisEdicao3 = [
+            { titulo: "Módulo 1: Metodologia de Investigação em Revisão Sistemática", teoria: "Temask/Tema-1/Tema-1(teoria).pdf", slides: "Temask/Tema-1/Tema-1(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 2: Introdução à Tomada de Decisão Baseada na Evidência e às Revisões Sistemáticas", teoria: "Temask/Tema-2/Tema-2(teoria).pdf", slides: "Temask/Tema-2/Tema-2(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 3: Introdução ao Software de Revisão Sistemática", teoria: "temas/Tema-3/Tema-3(teoria).pdf", slides: "temas/Tema-3/Tema-3(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 4: Introdução à Meta-Análise", teoria: "Temask/Tema-4/Tema-4(teoria).pdf", slides: "Temask/Tema-4/Tema-4(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 5: Desenvolvimento de Tópicos e Questões de Investigação para Revisões Sistemáticas", teoria: "temas/Tema-5/Tema-5(teoria).pdf", slides: "temas/Tema-5/Tema-5(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 6: Critérios de Elegibilidade para Revisão Sistemática", teoria: "Temask/Tema-6/Tema-6(teoria).pdf", slides: "Temask/Tema-6/Tema-6(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 7: Pesquisa Sistemática da Literatura", teoria: "Temask/Tema-7/Tema-7(teoria).pdf", slides: "Temask/Tema-7/Tema-7(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 8: Elaboração e Registo do Protocolo de Revisão Sistemática", teoria: "Temask/Tema-8/Tema-8(teoria).pdf", slides: "Temask/Tema-8/Tema-8(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 9: Selecção dos Estudos e Gestão do Processo de Triagem", teoria: "Temask/Tema-9/Tema-9(teoria).pdf", slides: "Temask/Tema-9/Tema-9(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 10: Extracção, Gestão e Harmonização de Dados", teoria: "Temask/Tema-10/Tema-10(teoria).pdf", slides: "Temask/Tema-10/Tema-10(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 11: Avaliação Crítica e Risco de Viés", teoria: "Temas/Tema-11/Tema-11(teoria).pdf", slides: "Temas/Tema-11/Tema-11(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 12: Estatística Avançada e Modelos de Meta-Análise", teoria: "Temask/Tema-12/Tema-12(teoria).pdf", slides: "Temask/Tema-12/Tema-12(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 13: Heterogeneidade, Subgrupos e Análises de Sensibilidade", teoria: "Temask/Tema-13/Tema-13(teoria).pdf", slides: "Temask/Tema-13/Tema-13(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 14: Viés de Publicação e Certeza da Evidência", teoria: "Temask/Tema-14/Tema-14(teoria).pdf", slides: "Temask/Tema-14/Tema-14(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 15: Inteligência Artificial e Automação de Revisões Sistemáticas", teoria: "temas/Tema-15/Tema-15(teoria).pdf", slides: "temas/Tema-15/Tema-15(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 16: Redacção Científica, PRISMA e Publicação", teoria: "Temask/Tema-16/Tema-16(teoria).pdf", slides: "Temask/Tema-16/Tema-16(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 17: Síntese de Evidência Qualitativa", teoria: "temas/Tema-17/Tema-17(teoria).pdf", slides: "temas/Tema-17/Tema-17(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 18: Revisões de Estudos de Diagnóstico e Prognóstico", teoria: "Temask/Tema-18/Tema-18(teoria).pdf", slides: "Temask/Tema-18/Tema-18(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 19: Meta-Análise em Rede", teoria: "temas/Tema-19/Tema-19(teoria).pdf", slides: "temas/Tema-19/Tema-19(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 20: Revisões de Âmbito e Revisões de Revisões", teoria: "Temask/Tema-20/Tema-20(teoria).pdf", slides: "Temask/Tema-20/Tema-20(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 21: Ciência Aberta e Reprodutibilidade", teoria: "Temas/Tema-21/Tema-21(teoria).pdf", slides: "Temas/Tema-21/Tema-21(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 22: Revisões Sistemáticas Vivas", teoria: "Temask/Tema-22/Tema-22(teoria).pdf", slides: "Temask/Tema-22/Tema-22(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 23: Integridade Científica e Gestão de Conflitos", teoria: "Temask/Tema-23/Tema-23(teoria).pdf", slides: "Temask/Tema-23/Tema-23(slides).pdf", exercicio: "#" },
+            { titulo: "Módulo 24: Seminário Doutoral, Defesa do Protocolo e Projecto de Publicação", teoria: "Temask/Tema-24/Tema-24(teoria).pdf", slides: "Temask/Tema-24/Tema-24(slides).pdf", exercicio: "#" }
+        ];
+
+        // Lógica de seleção exata baseada na Edição do URL
+        const materiais = (edicaoParam === '3') ? materiaisEdicao3 : materiaisEdicaoPadrao;
+        const totalModulos = materiais.length;
+
+        document.getElementById('subtituloSecao').innerText = `Complete os ${totalModulos} módulos para solicitar a certificação final.`;
+
         const container = document.getElementById('lista-temas');
         materiais.forEach((m, index) => {
             const card = document.createElement('section');
             card.className = "group bg-white p-8 rounded-3xl border border-slate-100 shadow-sm transition-all hover:shadow-md";
             card.innerHTML = `
                 <div class="flex items-center gap-6 mb-4">
-                    <span class="text-5xl font-black text-slate-100 group-hover:text-blue-100 transition-colors">0${index + 1}</span>
-                    <h3 class="text-2xl font-bold text-slate-800">${m.titulo}</h3>
+                    <span class="text-4xl font-black text-slate-200 group-hover:text-blue-100 transition-colors">${index + 1 < 10 ? '0' + (index + 1) : index + 1}</span>
+                    <h3 class="text-xl font-bold text-slate-800">${m.titulo}</h3>
                 </div>
-                <div class="flex flex-wrap gap-4 pl-16">
+                <div class="flex flex-wrap gap-4 pl-14">
                     <a href="${m.teoria}" target="_blank" class="px-5 py-2.5 bg-slate-100 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-slate-800 hover:text-white transition">📖 Teoria</a>
                     <a href="${m.slides}" target="_blank" class="px-5 py-2.5 bg-slate-100 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-slate-800 hover:text-white transition">📊 Slides</a>
                     <a href="${m.exercicio}" target="_blank" class="px-5 py-2.5 bg-blue-50 text-blue-600 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-blue-600 hover:text-white transition border border-blue-100">📝 Avaliação</a>
@@ -81,17 +123,19 @@
         });
 
         window.finalizarModulo = async (id) => {
-            let progresso = JSON.parse(localStorage.getItem('progresso_aluno')) || {};
+            let progresso = JSON.parse(localStorage.getItem(`progresso_aluno_2026_ed${edicaoParam}`)) || {};
             progresso[id] = true;
-            localStorage.setItem('progresso_aluno', JSON.stringify(progresso));
+            localStorage.setItem(`progresso_aluno_2026_ed${edicaoParam}`, JSON.stringify(progresso));
 
             const totalConcluidos = Object.keys(progresso).length;
-            if (totalConcluidos >= 7) {
+            if (totalConcluidos >= totalModulos) {
                 const user = auth.currentUser;
                 try {
                     await addDoc(collection(db, "conclusoes"), {
                         nome: user ? user.displayName : "Investigador",
                         email: user ? user.email : "N/A",
+                        ano: anoParam,
+                        edicao: `Edição ${edicaoParam}`,
                         data: new Date().toLocaleString(),
                         status: "pendente",
                         timestamp: serverTimestamp()
@@ -107,15 +151,12 @@
             } else {
                 Swal.fire({
                     title: 'Módulo Concluído!',
-                    text: `Faltam ${7 - totalConcluidos} módulos para terminar.`,
+                    text: `Faltam ${totalModulos - totalConcluidos} módulos para terminar.`,
                     icon: 'info',
                     timer: 2000
                 });
             }
         };
-
-        const params = new URLSearchParams(window.location.search);
-        document.getElementById('anoDisplay').innerText = params.get('ano') || '2026';
     </script>
 </body>
 </html>
